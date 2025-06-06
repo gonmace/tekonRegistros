@@ -130,11 +130,26 @@ class FormularioTX(models.Model):
     def calcular_distancia_geopy(self, lat_1, lon_1, lat_2, lon_2):
         """Calcula la distancia entre dos puntos usando geopy."""
         if lat_1 is not None and lon_1 is not None and lat_2 is not None and lon_2 is not None:
-            origen_coords = (lat_1, lon_1)
-            destino_coords = (lat_2, lon_2)
-            # Calcula la distancia usando geodesic de geopy
-            distancia = geodesic(origen_coords, destino_coords).meters
-            return distancia
+            try:
+                # Asegurarse de que los valores sean float
+                lat_1 = float(lat_1)
+                lon_1 = float(lon_1)
+                lat_2 = float(lat_2)
+                lon_2 = float(lon_2)
+                
+                # Validar que los valores estén en rangos válidos
+                if not (-90 <= lat_1 <= 90) or not (-90 <= lat_2 <= 90):
+                    return None
+                if not (-180 <= lon_1 <= 180) or not (-180 <= lon_2 <= 180):
+                    return None
+                    
+                origen_coords = (lat_1, lon_1)
+                destino_coords = (lat_2, lon_2)
+                # Calcula la distancia usando geodesic de geopy
+                distancia = geodesic(origen_coords, destino_coords).meters
+                return distancia
+            except (ValueError, TypeError):
+                return None
         else:
             return None
 
