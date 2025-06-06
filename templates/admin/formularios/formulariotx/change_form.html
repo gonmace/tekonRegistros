@@ -1,0 +1,85 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <!-- Aquí puedes incluir CSS o JS adicional -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos_impresion.css' %}" media="print"/>
+{% endblock %}
+
+{% block object-tools-items %}
+
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script> 
+
+var distancia = parseInt(document.querySelector("#id_dist_base_inspeccion").value)
+// Crea una nueva hoja de estilos si no existe, o selecciona una existente
+var styleSheet = document.createElement("style");
+styleSheet.type = "text/css";
+// Asegura que este estilo solo se aplique para impresión
+if (distancia < 10) {
+    var styleText = `
+    #id_dist_base_inspeccion {
+        background-color: #90EE90 !important; /* Cambia el color según necesites */
+    }`;
+} else if (distancia>10 && distancia <=30 ) {
+    var styleText = `
+    #id_dist_base_inspeccion {
+        background-color: yellow !important; /* Cambia el color según necesites */
+    }`;
+} else if(distancia>30) {
+    var styleText = `
+    #id_dist_base_inspeccion {
+        background-color: #FF6666 !important; /* Cambia el color según necesites */
+    }`;
+}
+
+// Añade la regla CSS a la hoja de estilos
+if (styleSheet.styleSheet) {
+    styleSheet.styleSheet.cssText = styleText; // Para IE
+} else {
+    styleSheet.appendChild(document.createTextNode(styleText)); // Para otros navegadores
+}
+
+// Añade la hoja de estilos al documento
+document.head.appendChild(styleSheet);
+
+
+
+
+
+var descriptionDiv = document.querySelector('#formulariotx_form > div > div:nth-child(1) > div:nth-child(2) > div.description');
+    // Reemplaza las frases específicas con versiones envueltas en span
+    if (descriptionDiv) {
+        // Obtén el contenido actual del elemento
+        var content = descriptionDiv.innerHTML;
+        
+        // Reemplaza las frases específicas con versiones envueltas en span
+        content = content.replace(/Mandato\/Inmobiliaria "M"/g, '<span class="mandato">Mandato/Inmobiliaria "M"</span>');
+        content = content.replace(/Inspeccion "I"/g, '<span class="inspeccion">Inspeccion "I"</span>');
+        content = content.replace(/Empalme/g, '<span class="empalme">Empalme</span>');
+        
+        // Asigna el contenido modificado de vuelta al elemento 'description'
+        descriptionDiv.innerHTML = content;
+        document.querySelectorAll('.mandato').forEach(function(el) {
+            el.style.backgroundColor = '#90EE90'; // Verde claro
+          });
+        
+          document.querySelectorAll('.inspeccion').forEach(function(el) {
+            el.style.backgroundColor = '#FFFF00'; // Amarillo
+          });
+        
+          document.querySelectorAll('.empalme').forEach(function(el) {
+            el.style.backgroundColor = '#00FFFF'; // Cyan
+          });
+      }
+
+</script>
+{% endblock %}

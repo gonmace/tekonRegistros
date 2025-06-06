@@ -1,0 +1,87 @@
+/* static/css/custom_admin.css */
+.change-form .form-row {
+    margin-bottom: 0px !important; /* Reducir el margen inferior */
+}
+
+.field-box {
+    padding: 2px 0px !important; /* Ajustar el relleno */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* crea dos columnas de igual ancho */
+    gap: 20px; /* espacio entre los elementos del grid */
+  }
+  
+  .grid-item img {
+    width: 75%; /* hace que las imágenes se expandan para llenar su contenedor */
+    height: auto; /* mantiene la proporción de aspecto de las imágenes */
+  }
+  
+  .grid-item p {
+    text-align: center; /* centra el texto de la descripción */
+  }
+
+  #id_dist_base_inspeccion {
+    font-size: large;
+    font-weight: 900;
+    text-align: center;
+}	
+
+
+
+    @media (max-width: 767px) {
+        /* .aligned .form-row input, .aligned .form-row select, .aligned .form-row textarea {
+            flex: 1 1 auto;
+            max-width: 100%;
+        } */
+        #user-tools {
+            display: none;}
+        input {
+            width: 40%;
+        }	
+        
+    }
+
+ 
+    .module {
+        position: relative !important;
+      }	
+    
+    .field-dist_base_inspeccion {
+        position: absolute !important;
+        top: 0 !important;
+        right: 35% !important;
+        width: 100px !important;
+        
+    }
+
+    .field-lat, .field-lon, .field-lat_base, .field-lon_base, .field-lat_energia, .field-lon_energia {
+        width: 350px !important;
+        margin-right: 100px !important;
+    }
+
+    .field-distanciaEmpalmeSitio {
+        /* width: 300px !important; */
+        margin-right: 550px !important;
+    }
+
+    .field-dimensiones, .field-longitudAccesoConstuccion, .field-longitudAcceso, .field-fecha_creacion  {
+        margin-right: 540px !important;
+    }
+
+      
+    .field-lat_gms > div,
+    .field-lon_gms > div,
+    .field-lat_base_gms > div,
+    .field-lon_base_gms > div,
+    .field-lat_energia_gms > div,
+    .field-lon_energia_gms > div
+    {
+        border: 1px solid rgba(34,36,38,.15);
+        width: 150px; 
+    }
+
+    .field-lat_base, .field-lat_base_gms {
+        margin-top: 35px !important;
+    }
