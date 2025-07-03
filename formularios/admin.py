@@ -34,6 +34,8 @@ class SitiosResource(resources.ModelResource):
     comuna = fields.Field(column_name='Comuna', attribute='Comuna')
     provincia = fields.Field(column_name='Provincia', attribute='Provincia')
     altura = fields.Field(column_name='Altura', attribute='altura')
+    lat_base = fields.Field(column_name='Latitud Base', attribute='lat_base')
+    lon_base = fields.Field(column_name='Longitud Base', attribute='lon_base')
     
     class Meta:
         model = Sitio
